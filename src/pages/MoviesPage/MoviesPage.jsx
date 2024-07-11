@@ -2,19 +2,24 @@ import css from "./MoviesPage.module.css";
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { getSearchingMovies } from "../../movies-api";
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
-  const [topic, setTopic] = useState('');
   const [error, setError] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [loading, setLoading] = useState(false); 
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const userSearch = searchParams.get("search") ?? "";
+  const [topic, setTopic] = useState(userSearch);
 
   async function handleSearch(query) {
     if (query === topic) return;
     setMovies([]);
     setTopic(query);
+    setSearchParams({ search: query });
   }
 
   useEffect(() => {
@@ -30,7 +35,7 @@ export default function MoviesPage() {
           setIsEmpty(true);
           return;
         }
-        setMovies((prevMovies) =>[...prevMovies, ...newMovies]);
+        setMovies(newMovies);
       } catch (error) {
         setError(true);
       } finally {
@@ -43,7 +48,7 @@ export default function MoviesPage() {
 
   return (
     <div className={css.container}>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} value={userSearch} />
       {isEmpty && (
         <p style={{ fontSize: '28px', color: "red" }}>
           Hello, friend! Please, enter a valid query!
@@ -55,4 +60,3 @@ export default function MoviesPage() {
     </div>
   );   
 }
-

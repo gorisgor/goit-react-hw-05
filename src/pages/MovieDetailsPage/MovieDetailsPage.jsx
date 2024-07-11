@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
 import css from "./MovieDetailsPage.module.css";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getMovieDetails } from "../../movies-api";
+import { useLocation, Link } from "react-router-dom";
 
 export default function MovieDetailsPage() {
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? "/movies");
+
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -12,7 +16,6 @@ export default function MovieDetailsPage() {
     async function getMovie() {
       try {
         const data = await getMovieDetails(movieId);
-        console.log(data);
         setMovie(data);
       } catch (error) {
         console.error("Error fetching movie details:", error);
@@ -21,5 +24,10 @@ export default function MovieDetailsPage() {
     getMovie();
   }, [movieId]);
 
-  return movie ? <MovieCard movie={movie} /> : <p>Loading...</p>;
+  return (
+    <div>
+      <Link to={backLinkRef.current}>Go back</Link>
+      {movie ? <MovieCard movie={movie} /> : <p>Loading...</p>}
+    </div>
+  );
 }
