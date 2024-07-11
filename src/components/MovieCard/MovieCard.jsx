@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import css from './MovieCard.module.css';
 import { NavLink, Outlet } from "react-router-dom";
 import clsx from 'clsx';
@@ -40,7 +41,9 @@ export default function MovieCard({ movie }) {
         </li>
       </ul> 
     </div>  
-     <Outlet /> 
+    <Suspense>                                    
+      <Outlet /> 
+    </Suspense>                                                       
      </>  
   );
 }

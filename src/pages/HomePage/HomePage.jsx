@@ -2,6 +2,8 @@ import css from "./HomePage.module.css";
 import { getTrendingMovies } from "../../movies-api";
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
+import Loader from '../../components/Loader/Loader'
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -22,13 +24,12 @@ export default function HomePage() {
     fetchMovies();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
     <div className={css.container}>
       <h1 className={css.title}>Tranding today</h1>
-      {movies.length > 0 ? <MovieList movies={movies} /> : <p>No movies found</p>}
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
+      {movies.length > 0 && <MovieList movies={movies} /> }
     </div>
   );
 }

@@ -1,0 +1,28 @@
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .item {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+    
+  .user {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .review {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+  }
+  

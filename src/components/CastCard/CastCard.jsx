@@ -6,10 +6,10 @@ const defaultImg ='https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster'
 export default function CastCard({ cast }) {
   
   return (
-    <ul>
+    <ul className={css.list}>
       {cast.map(({ id, profile_path, original_name, character }) => (
-        <li key={id} >
-          <img
+        <li key={id} className={css.item}>
+          <img className={css.actor}
             src={profile_path ? imageUrl + profile_path : defaultImg}
             alt={original_name}
           />

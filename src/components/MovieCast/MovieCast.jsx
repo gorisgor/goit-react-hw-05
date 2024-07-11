@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { getMovieCast } from "../../movies-api";
 import { useParams } from "react-router-dom";
 import CastCard from "../CastCard/CastCard";
+import Loader from '../../components/Loader/Loader'
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 
 
@@ -11,6 +13,8 @@ export default function MovieCast() {
  
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
     useEffect(() => {
       if (!movieId) return;
@@ -19,7 +23,9 @@ export default function MovieCast() {
         const data = await getMovieCast(movieId);
         setCast(data);
       } catch (error) {
-        console.error("Error fetching movie details:", error);
+        setError(error)
+      } finally {
+        setLoading(false)
       }
     }
     getMovie();
@@ -27,7 +33,13 @@ export default function MovieCast() {
 
 
 
-  return <div>
-    {cast.length>0 ?<CastCard cast={cast} /> : <p>No actors at this movie</p>}
+  return <div className={css.container}>
+    {loading && <Loader />}
+    {error && <ErrorMessage />}
+    {cast.length > 0 ? (
+        <CastCard cast={cast} />
+      ) : (
+        !loading && !error && <p>No actors in this movie</p>
+      )}
     </div>;
 }

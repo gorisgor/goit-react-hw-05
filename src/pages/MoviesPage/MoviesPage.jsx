@@ -4,6 +4,8 @@ import MovieList from '../../components/MovieList/MovieList';
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getSearchingMovies } from "../../movies-api";
+import Loader from '../../components/Loader/Loader'
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
@@ -28,8 +30,8 @@ export default function MoviesPage() {
     async function getMovies() {
       try {
         setIsEmpty(false);
-        setLoading(true);
         setError(false);
+        setLoading(true);
         const { movies: newMovies } = await getSearchingMovies(topic);
         if (newMovies.length === 0) {
           setIsEmpty(true);
@@ -55,8 +57,8 @@ export default function MoviesPage() {
         </p>
       )}
       {movies.length > 0 && <MovieList movies={movies} />}  
-      {error && <p>Something went wrong, Please reload page</p>}
-      {loading && <p>Loading...</p>}
+      {error && <ErrorMessage/>}
+      {loading && <Loader/>}
     </div>
   );   
 }
