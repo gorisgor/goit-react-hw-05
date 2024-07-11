@@ -11,11 +11,11 @@ export default function SearchBar({ onSearch, value }) {
     const query = form.elements.query.value.trim(); 
     if (!query) {
       toast.error("Please, fulfill query");
-      form.reset();
+      setQuery('');
       return;
     }
     onSearch(query);
-    form.reset();
+    setQuery('');
   }
 
   function handleChange(e) {
