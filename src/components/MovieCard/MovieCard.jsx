@@ -1,5 +1,5 @@
 import css from './MovieCard.module.css';
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Outlet } from "react-router-dom";
 import clsx from 'clsx';
 
 const imageUrl = 'https://image.tmdb.org/t/p/w400/';
@@ -22,7 +22,7 @@ export default function MovieCard({ movie }) {
         </div>
         <div className={css.desc}>
           <h2>{title}</h2>
-          <p>USERS VOTE: {vote_average}</p>
+          <p>USERS RATE: {vote_average}</p>
           <p>OVERVIEW: {overview}</p>
           <p>GENRES: {genres.map((genre) => genre.name).join(", ")}</p>
         </div>
@@ -30,7 +30,7 @@ export default function MovieCard({ movie }) {
       <p>ADDITIONAL INFORMATION</p>
       <ul>
         <li> 
-          <NavLink to="cast" className={makeNavLinkClass}>
+          <NavLink to="cast" className={makeNavLinkClass} >
             <p>Cast</p>
           </NavLink>
         </li>

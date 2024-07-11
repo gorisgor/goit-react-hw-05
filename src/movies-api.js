@@ -39,3 +39,25 @@ export const getMovieDetails = async (movieId) => {
 
   return response.data;
 };
+
+export const getMovieCast = async (movieId) => {
+  const response = await axios.get(`/movie/${movieId}/credits`, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+      accept: 'application/json',
+    },
+  });
+
+  return response.data.cast;
+};
+
+export const getMovieReviews = async (movieId) => {
+  const response = await axios.get(`/movie/${movieId}/reviews`, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+      accept: 'application/json',
+    },
+  });
+
+  return response.data.results;
+};
