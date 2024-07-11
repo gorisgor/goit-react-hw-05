@@ -23,14 +23,22 @@
 .link{
     text-decoration: none;
     font-size: 18px;
+    color: rgb(0, 0, 0);
 }
 
 .active {
-    color:aqua;
+    color:rgb(0, 68, 255);
 }
 
 .border {
     border-bottom: 1px solid #e7e9fc;
     box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 1px 6px rgba(46, 47, 66, 0.08);;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
 }
 

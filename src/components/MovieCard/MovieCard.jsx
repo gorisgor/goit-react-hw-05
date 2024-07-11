@@ -26,9 +26,9 @@ export default function MovieCard({ movie }) {
           <p>OVERVIEW: {overview}</p>
           <p>GENRES: {genres.map((genre) => genre.name).join(", ")}</p>
         </div>
-      </div>
+      </div >
       <p>ADDITIONAL INFORMATION</p>
-      <ul>
+      <ul className={css.list}>
         <li> 
           <NavLink to="cast" className={makeNavLinkClass} >
             <p>Cast</p>
