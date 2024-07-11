@@ -13,11 +13,11 @@ export default function MovieCast() {
   const [cast, setCast] = useState([]);
 
     useEffect(() => {
+      if (!movieId) return;
     async function getMovie() {
       try {
         const data = await getMovieCast(movieId);
         setCast(data);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
@@ -27,5 +27,7 @@ export default function MovieCast() {
 
 
 
-  return <CastCard cast={cast} />;
+  return <div>
+    {cast.length>0 ?<CastCard cast={cast} /> : <p>No actors at this movie</p>}
+    </div>;
 }

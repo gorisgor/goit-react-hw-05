@@ -26,8 +26,8 @@ export default function HomePage() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
-      <h1>Tranding today</h1>
+    <div className={css.container}>
+      <h1 className={css.title}>Tranding today</h1>
       {movies.length > 0 ? <MovieList movies={movies} /> : <p>No movies found</p>}
     </div>
   );

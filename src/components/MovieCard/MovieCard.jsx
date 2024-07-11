@@ -1,8 +1,9 @@
 import css from './MovieCard.module.css';
-import { NavLink, useLocation, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import clsx from 'clsx';
 
 const imageUrl = 'https://image.tmdb.org/t/p/w400/';
+const defaultImg ='https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster'
 
 const makeNavLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -12,13 +13,11 @@ export default function MovieCard({ movie }) {
   const { title, original_title, vote_average, overview, genres, backdrop_path } = movie;
   const src = imageUrl + backdrop_path;
 
- 
-
   return ( <>
     <div className={css.border}>
       <div className={css.container}>
         <div className={css.img}>
-          <img src={src} alt={original_title} />
+          <img src={backdrop_path ? src : defaultImg} alt={original_title} />
         </div>
         <div className={css.desc}>
           <h2>{title}</h2>

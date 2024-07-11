@@ -9,11 +9,11 @@ const { movieId } = useParams();
 const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    if (!movieId) return;
   async function getReviews() {
     try {
       const data = await getMovieReviews(movieId);
       setReviews(data);
-      console.log(data);
     } catch (error) {
       console.error("Error fetching movie details:", error);
     }
@@ -27,6 +27,6 @@ return <div>
 {reviews.length > 0 ? (
   <ReviewsCard reviews={reviews} />
 ) : (
-  <p>No reviews available</p>
+  <p>No reviews available for this movie</p>
 )}
 </div>}
